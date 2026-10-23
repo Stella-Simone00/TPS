@@ -3,348 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TPS Lab | Progetto di Sistemi e Reti</title>
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg: #0b0f19;
-            --card-bg: rgba(22, 27, 34, 0.7);
-            --border: rgba(255, 255, 255, 0.1);
-            --accent: #8b5cf6;
-            --accent-glow: rgba(139, 92, 246, 0.4);
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --green: #10b981;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 40%);
-        }
-
-        /* Navbar */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 8%;
-            border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(11, 15, 25, 0.8);
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        .btn-github {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .btn-github:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        /* Main Container */
-        main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 4rem 1.5rem;
-            flex: 1;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .badge {
-            display: inline-block;
-            background: rgba(139, 92, 246, 0.1);
-            color: #a78bfa;
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            padding: 0.4rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            color: #ffffff;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.15rem;
-            max-width: 650px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-        }
-
-        /* Grid Section */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 4rem;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 2rem;
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
-        }
-
-        .card-icon {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* Terminal Simulator */
-        .terminal-box {
-            background: #0d1117;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .terminal-header {
-            background: #161b22;
-            padding: 0.8rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .dot-red { background: #ff5f56; }
-        .dot-yellow { background: #ffbd2e; }
-        .dot-green { background: #27c93f; }
-
-        .terminal-title {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-family: 'JetBrains Mono', monospace;
-            margin-left: auto;
-        }
-
-        .terminal-body {
-            padding: 1.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--green);
-            min-height: 160px;
-        }
-
-        .terminal-line {
-            margin-bottom: 0.5rem;
-        }
-
-        .terminal-input-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 1rem;
-        }
-
-        .prompt {
-            color: var(--accent);
-        }
-
-        input[type="text"] {
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            outline: none;
-            width: 100%;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        footer strong {
-            color: var(--text-main);
-        }
-    </style>
+    <title>Progetto TPS | Simone Stella</title>
 </head>
 <body>
 
+    <!-- Intestazione Principale -->
     <header>
-        <div class="logo">🚀 TPS<span>Lab</span></div>
-        <nav>
-            <a href="https://github.com/Stella-Simone00/TPS" target="_blank" class="btn-github">Apri su GitHub ↗</a>
-        </nav>
+        <h1>TPS Lab - Tecnologie e Progettazione di Sistemi</h1>
+        <p>Repository ufficiale per il corso di TPS</p>
+        <hr>
     </header>
 
+    <!-- Navigazione / Link Veloci -->
+    <nav>
+        <h3>Indice del Progetto:</h3>
+        <ul>
+            <li><a href="#info">Informazioni sul Progetto</a></li>
+            <li><a href="#moduli">Moduli di Studio</a></li>
+            <li><a href="#autore">Autore</a></li>
+            <li><a href="https://github.com/Stella-Simone00/TPS" target="_blank">Visualizza su GitHub</a></li>
+        </ul>
+        <hr>
+    </nav>
+
+    <!-- Sezione Informazioni -->
     <main>
-        <section class="hero">
-            <span class="badge">Tecnologie e Progettazione di Sistemi</span>
-            <h1>Sviluppo Web e Reti Informatiche</h1>
-            <p>Laboratorio digitale e repository ufficiale del progetto TPS. Un punto di riferimento per codice, esercitazioni e architetture di rete.</p>
+        <section id="info">
+            <h2>Informazioni sul Progetto</h2>
+            <p>Questa repository raccoglie tutto il materiale, gli esercizi e le risorse dedicate allo studio delle <strong>Tecnologie e Progettazione di Sistemi Informatici e di Telecomunicazioni</strong>.</p>
         </section>
 
-        <section class="grid">
-            <div class="card">
-                <div class="card-icon">🌐</div>
-                <h3>Sviluppo Frontend</h3>
-                <p>Interfacce web dinamiche, reattive e accessibili realizzate con gli standard moderni del Web.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">⚙️</div>
-                <h3>Sistemi & Architetture</h3>
-                <p>Studio dei sistemi operativi, gestione dei processi e architetture client-server.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">📡</div>
-                <h3>Reti & Protocolli</h3>
-                <p>Analisi del modello ISO/OSI, suite TCP/IP, sockets e comunicazione su rete.</p>
-            </div>
+        <br>
+
+        <!-- Sezione Moduli -->
+        <section id="moduli">
+            <h2>Moduli e Argomenti</h2>
+            
+            <article>
+                <h3>1. Sviluppo Web Frontend</h3>
+                <p>Creazione di pagine web utilizzando i linguaggi standard di markup e programmazione:</p>
+                <ul>
+                    <li><strong>HTML5</strong> per la struttura dei contenuti</li>
+                    <li><strong>CSS3</strong> per la formattazione e la grafica</li>
+                    <li><strong>JavaScript</strong> per le interazioni dinamiche</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>2. Sistemi Operativi e Architetture</h3>
+                <p>Studio dei componenti hardware e dei sistemi di elaborazione:</p>
+                <ul>
+                    <li>Gestione dei processi e della memoria</li>
+                    <li>Architetture Client-Server</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>3. Reti e Protocolli di Comunicazione</h3>
+                <p>Analisi delle reti di calcolatori e trasmissione dati:</p>
+                <ul>
+                    <li>Modello di riferimento ISO/OSI e suite TCP/IP</li>
+                    <li>Indirizzamento IP e configurazione di rete</li>
+                </ul>
+            </article>
         </section>
 
-        <section class="terminal-box">
-            <div class="terminal-header">
-                <div class="dot dot-red"></div>
-                <div class="dot dot-yellow"></div>
-                <div class="dot dot-green"></div>
-                <span class="terminal-title">tps-simulated-shell</span>
-            </div>
-            <div class="terminal-body" id="terminal">
-                <div class="terminal-line">[SYSTEM] Inizializzazione modulo TPS completata.</div>
-                <div class="terminal-line">[INFO] Digita <b style="color: #fff;">help</b> per vedere i comandi disponibili.</div>
-            </div>
-            <div style="padding: 0 1.5rem 1.5rem;">
-                <div class="terminal-input-container">
-                    <span class="prompt">student@tps-lab:~$</span>
-                    <input type="text" id="cmdInput" placeholder="scrivi un comando..." autofocus>
-                </div>
-            </div>
+        <br>
+        <hr>
+
+        <!-- Sezione Autore -->
+        <section id="autore">
+            <h2>Autore</h2>
+            <p><strong>Nome:</strong> Simone Stella</p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/Stella-Simone00" target="_blank">@Stella-Simone00</a></p>
         </section>
     </main>
 
+    <br>
+    <hr>
+
+    <!-- Piè di pagina -->
     <footer>
-        <p>&copy; Progetto TPS — Sviluppato da <strong>Simone Stella</strong></p>
+        <p>&copy; 2026 Progetto TPS — Tutti i diritti riservati.</p>
     </footer>
 
-    <script>
-        const input = document.getElementById('cmdInput');
-        const terminal = document.getElementById('terminal');
-
-        input.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const cmd = input.value.trim().toLowerCase();
-                input.value = '';
-
-                const userLine = document.createElement('div');
-                userLine.className = 'terminal-line';
-                userLine.style.color = '#fff';
-                userLine.innerHTML = `<span class="prompt">student@tps-lab:~$</span> ${cmd}`;
-                terminal.appendChild(userLine);
-
-                const resLine = document.createElement('div');
-                resLine.className = 'terminal-line';
-
-                switch(cmd) {
-                    case 'help':
-                        resLine.innerHTML = 'Comandi disponibili: <b style="color:#a78bfa">info</b>, <b style="color:#a78bfa">ping</b>, <b style="color:#a78bfa">clear</b>, <b style="color:#a78bfa">status</b>';
-                        break;
-                    case 'info':
-                        resLine.innerHTML = '📌 Progetto: Laboratorio TPS | Autore: Simone Stella';
-                        break;
-                    case 'ping':
-                        resLine.innerHTML = 'PING github.com (140.82.121.4): 56 data bytes<br>64 bytes from github: icmp_seq=1 ttl=56 time=14.2 ms';
-                        break;
-                    case 'status':
-                        resLine.innerHTML = '🟢 Server Online | Protocollo: HTTP/2 | SSL: Attivo';
-                        break;
-                    case 'clear':
-                        terminal.innerHTML = '';
-                        return;
-                    case '':
-                        return;
-                    default:
-                        resLine.style.color = '#ef4444';
-                        resLine.innerText = `Comando non riconosciuto: '${cmd}'. Digita 'help'.`;
-                }
-
-                terminal.appendChild(resLine);
-                terminal.scrollTop = terminal.scrollHeight;
-            }
-        });
-    </script>
 </body>
 </html>
