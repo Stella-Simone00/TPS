@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repository di TPS</title>
+    <title>TPS Lab | Progetto di Sistemi e Reti</title>
     <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     
@@ -62,18 +62,6 @@
             color: var(--accent);
         }
 
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 1.5rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--text-main);
-        }
-
         .btn-github {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border);
@@ -122,9 +110,7 @@
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
         }
 
         .hero p {
@@ -172,3 +158,193 @@
             color: var(--text-muted);
             font-size: 0.95rem;
             line-height: 1.5;
+        }
+
+        /* Terminal Simulator */
+        .terminal-box {
+            background: #0d1117;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .terminal-header {
+            background: #161b22;
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .terminal-title {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-left: auto;
+        }
+
+        .terminal-body {
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--green);
+            min-height: 160px;
+        }
+
+        .terminal-line {
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-input-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .prompt {
+            color: var(--accent);
+        }
+
+        input[type="text"] {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            outline: none;
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer strong {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🚀 TPS<span>Lab</span></div>
+        <nav>
+            <a href="https://github.com/Stella-Simone00/TPS" target="_blank" class="btn-github">Apri su GitHub ↗</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <span class="badge">Tecnologie e Progettazione di Sistemi</span>
+            <h1>Sviluppo Web e Reti Informatiche</h1>
+            <p>Laboratorio digitale e repository ufficiale del progetto TPS. Un punto di riferimento per codice, esercitazioni e architetture di rete.</p>
+        </section>
+
+        <section class="grid">
+            <div class="card">
+                <div class="card-icon">🌐</div>
+                <h3>Sviluppo Frontend</h3>
+                <p>Interfacce web dinamiche, reattive e accessibili realizzate con gli standard moderni del Web.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚙️</div>
+                <h3>Sistemi & Architetture</h3>
+                <p>Studio dei sistemi operativi, gestione dei processi e architetture client-server.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📡</div>
+                <h3>Reti & Protocolli</h3>
+                <p>Analisi del modello ISO/OSI, suite TCP/IP, sockets e comunicazione su rete.</p>
+            </div>
+        </section>
+
+        <section class="terminal-box">
+            <div class="terminal-header">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+                <span class="terminal-title">tps-simulated-shell</span>
+            </div>
+            <div class="terminal-body" id="terminal">
+                <div class="terminal-line">[SYSTEM] Inizializzazione modulo TPS completata.</div>
+                <div class="terminal-line">[INFO] Digita <b style="color: #fff;">help</b> per vedere i comandi disponibili.</div>
+            </div>
+            <div style="padding: 0 1.5rem 1.5rem;">
+                <div class="terminal-input-container">
+                    <span class="prompt">student@tps-lab:~$</span>
+                    <input type="text" id="cmdInput" placeholder="scrivi un comando..." autofocus>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Progetto TPS — Sviluppato da <strong>Simone Stella</strong></p>
+    </footer>
+
+    <script>
+        const input = document.getElementById('cmdInput');
+        const terminal = document.getElementById('terminal');
+
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const cmd = input.value.trim().toLowerCase();
+                input.value = '';
+
+                const userLine = document.createElement('div');
+                userLine.className = 'terminal-line';
+                userLine.style.color = '#fff';
+                userLine.innerHTML = `<span class="prompt">student@tps-lab:~$</span> ${cmd}`;
+                terminal.appendChild(userLine);
+
+                const resLine = document.createElement('div');
+                resLine.className = 'terminal-line';
+
+                switch(cmd) {
+                    case 'help':
+                        resLine.innerHTML = 'Comandi disponibili: <b style="color:#a78bfa">info</b>, <b style="color:#a78bfa">ping</b>, <b style="color:#a78bfa">clear</b>, <b style="color:#a78bfa">status</b>';
+                        break;
+                    case 'info':
+                        resLine.innerHTML = '📌 Progetto: Laboratorio TPS | Autore: Simone Stella';
+                        break;
+                    case 'ping':
+                        resLine.innerHTML = 'PING github.com (140.82.121.4): 56 data bytes<br>64 bytes from github: icmp_seq=1 ttl=56 time=14.2 ms';
+                        break;
+                    case 'status':
+                        resLine.innerHTML = '🟢 Server Online | Protocollo: HTTP/2 | SSL: Attivo';
+                        break;
+                    case 'clear':
+                        terminal.innerHTML = '';
+                        return;
+                    case '':
+                        return;
+                    default:
+                        resLine.style.color = '#ef4444';
+                        resLine.innerText = `Comando non riconosciuto: '${cmd}'. Digita 'help'.`;
+                }
+
+                terminal.appendChild(resLine);
+                terminal.scrollTop = terminal.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
