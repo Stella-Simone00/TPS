@@ -4,131 +4,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anagrafica 1.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
+            background-color: #0d1117;
+            color: #f0f6fc;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             padding: 20px;
         }
 
-        h2 {
+        .card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 16px;
+            padding: 35px;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 800;
             margin-bottom: 20px;
-            color: #333;
             text-align: center;
+            letter-spacing: -0.5px;
         }
 
         .gabbia {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 20px;
             width: 100%;
-            max-width: 400px;
-            background-color: #ffffff;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
-            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
         }
 
         input {
-            display: block;
-            margin-bottom: 12px;
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 14px 16px;
+            color: #f0f6fc;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
         }
 
         input:focus {
-            outline: none;
-            border-color: #007bff;
+            border-color: #58a6ff;
+            background: #282e36;
+        }
+
+        input::placeholder {
+            color: #8b949e;
         }
 
         button {
-            width: 100%;
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
+            background: #238636;
+            color: #ffffff;
+            border: 1px solid rgba(240, 246, 252, 0.1);
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 15px;
-            font-weight: bold;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
+            margin-top: 5px;
         }
 
         button:hover {
-            background-color: #218838;
+            background: #2ea043;
+            transform: translateY(-1px);
         }
 
         table {
-            border-collapse: collapse;
             width: 100%;
-            max-width: 700px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border-radius: 8px;
+            border-collapse: collapse;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 10px;
             overflow: hidden;
         }
 
         th, td {
-            border: 1px solid #e0e0e0;
-            padding: 12px;
-            text-align: center;
+            padding: 12px 14px;
+            text-align: left;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #30363d;
         }
 
         th {
-            background-color: #007bff;
-            color: white;
+            background: #161b22;
+            color: #8b949e;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
         }
 
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        td {
+            color: #f0f6fc;
         }
     </style>
 </head>
 <body>
 
-    <h2>Anagrafica 1.0</h2>
+    <div class="card">
+        <h1>Anagrafica 1.0</h1>
 
-    <div class="gabbia">
-        <input type="text" id="nome" placeholder="Nome">
-        <input type="text" id="cognome" placeholder="Cognome">
-        <input type="text" id="indirizzo" placeholder="Indirizzo">
-        <input type="text" id="citta" placeholder="Città">
-        <input type="number" id="eta" placeholder="Età">
-        
-        <button onclick="aggiungiDati()">Aggiungi alla Tabella</button>
+        <div class="gabbia">
+            <input type="text" id="nome" placeholder="Nome">
+            <input type="text" id="cognome" placeholder="Cognome">
+            <input type="text" id="indirizzo" placeholder="Indirizzo">
+            <input type="text" id="citta" placeholder="Città">
+            <input type="number" id="eta" placeholder="Età">
+            
+            <button onclick="aggiungiDati()">Aggiungi alla Tabella</button>
+        </div>
+
+        <table id="tabellaAnagrafica">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Cognome</th>
+                    <th>Indirizzo</th>
+                    <th>Città</th>
+                    <th>Età</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
 
-    <table id="tabellaAnagrafica">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Cognome</th>
-                <th>Indirizzo</th>
-                <th>Città</th>
-                <th>Età</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <!-- JAVASCRIPT -->
     <script>
         function aggiungiDati() {
             let valNome = document.getElementById("nome").value;
@@ -143,7 +169,6 @@
             }
 
             let tbody = document.getElementById("tabellaAnagrafica").getElementsByTagName('tbody')[0];
-
             let nuovaRiga = tbody.insertRow();
 
             nuovaRiga.insertCell(0).innerText = valNome;
