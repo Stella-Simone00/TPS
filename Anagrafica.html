@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Anagrafica 1.0</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        .gabbia {
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            width: 300px;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+        }
+        
+        input {
+            display: block;
+            margin-bottom: 10px;
+            width: 90%;
+            padding: 5px;
+        }
+        
+        button {
+            padding: 8px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Anagrafica 1.0</h2>
+
+    <div class="gabbia">
+        <input type="text" id="nome" placeholder="Nome">
+        <input type="text" id="cognome" placeholder="Cognome">
+        <input type="text" id="indirizzo" placeholder="Indirizzo">
+        <input type="text" id="citta" placeholder="Città">
+        <input type="number" id="eta" placeholder="Età">
+        
+        <button onclick="aggiungiDati()">Aggiungi alla Tabella</button>
+    </div>
+
+    <table id="tabellaAnagrafica">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Indirizzo</th>
+                <th>Città</th>
+                <th>Età</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <!--JAVASCRIPT -->
+    <script>
+        function aggiungiDati() {
+            let valNome = document.getElementById("nome").value;
+            let valCognome = document.getElementById("cognome").value;
+            let valIndirizzo = document.getElementById("indirizzo").value;
+            let valCitta = document.getElementById("citta").value;
+            let valEta = document.getElementById("eta").value;
+
+            if(valNome === "" || valCognome === "") {
+                alert("Inserisci almeno Nome e Cognome!");
+                return;
+            }
+
+            let tbody = document.getElementById("tabellaAnagrafica").getElementsByTagName('tbody')[0];
+
+            let nuovaRiga = tbody.insertRow();
+
+            nuovaRiga.insertCell(0).innerHTML = valNome;
+            nuovaRiga.insertCell(1).innerHTML = valCognome;
+            nuovaRiga.insertCell(2).innerHTML = valIndirizzo;
+            nuovaRiga.insertCell(3).innerHTML = valCitta;
+            nuovaRiga.insertCell(4).innerHTML = valEta;
+
+            document.getElementById("nome").value = "";
+            document.getElementById("cognome").value = "";
+            document.getElementById("indirizzo").value = "";
+            document.getElementById("citta").value = "";
+            document.getElementById("eta").value = "";
+            
+            document.getElementById("nome").focus();
+        }
+    </script>
+
+</body>
+</html>
