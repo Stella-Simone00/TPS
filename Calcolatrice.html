@@ -1,46 +1,143 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Calcolatrice</title>
-  </head>
-  <body>
-    <input type="number" id="numero1">
-    <input type="number" id="numero2">
-    
-    <button onclick="somma()">+</button>
-    <button onclick="sottrai()">-</button>
-    <button onclick="moltiplica()">*</button>
-    <button onclick="dividi()">/</button>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calcolatrice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-    
-    <h3 id="risultato">Risultato: </h3>
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-    <script>
-    function somma() {
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    h1 {
+      color: #ffffff;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 25px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      background: #21262d;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 12px;
+      color: #f0f6fc;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      border-color: #58a6ff;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    button {
+      background: #21262d;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 12px;
+      color: #f0f6fc;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      border-color: #58a6ff;
+      background: #282e36;
+      transform: translateY(-2px);
+    }
+
+    h3 {
+      color: #58a6ff;
+      font-size: 1.2rem;
+      font-weight: 600;
+      background: #21262d;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #30363d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Calcolatrice</h1>
+
+    <div class="input-group">
+      <input type="number" id="numero1" placeholder="Primo numero">
+      <input type="number" id="numero2" placeholder="Secondo numero">
+    </div>
+
+    <div class="buttons">
+      <button onclick="calcolatore('+')">+</button>
+      <button onclick="calcolatore('-')">-</button>
+      <button onclick="calcolatore('*')">×</button>
+      <button onclick="calcolatore('/')">÷</button>
+    </div>
+
+    <h3 id="risultato">Risultato: -</h3>
+  </div>
+
+  <script>
+    function calcolatore(operatore) {
       let n1 = parseFloat(document.getElementById("numero1").value);
       let n2 = parseFloat(document.getElementById("numero2").value);
-      let res = n1 + n2;
+      let res = 0;
+
+      if (operatore == '+') {
+        res = n1 + n2;
+      } else if (operatore == '-') {
+        res = n1 - n2;
+      } else if (operatore == '*') {
+        res = n1 * n2;
+      } else if (operatore == '/') {
+        res = n1 / n2;
+      }
+
       document.getElementById("risultato").textContent = "Risultato: " + res;
     }
-    
-    function sottrazione() {
-      let n1 = parseFloat(document.getElementById("numero1").value);
-      let n2 = parseFloat(document.getElementById("numero2").value);
-      let res = n1 - n2;
-      document.getElementById("risultato").textContent = "Risultato: " + res;
-    }
-   function moltiplicazione() {
-      let n1 = parseFloat(document.getElementById("numero1").value);
-      let n2 = parseFloat(document.getElementById("numero2").value);
-      let res = n1 * n2;
-      document.getElementById("risultato").textContent = "Risultato: " + res;
-   }
-    function divisione() {
-      let n1 = parseFloat(document.getElementById("numero1").value);
-      let n2 = parseFloat(document.getElementById("numero2").value);
-      let res = n1 / n2;
-      document.getElementById("risultato").textContent = "Risultato: " + res;
-    }
-    </script>
-  </body>
+  </script>
+
+</body>
 </html>
