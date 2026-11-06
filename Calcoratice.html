@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calcolatrice</title>
+  </head>
+  <body>
+    <input type="number" id="numero1">
+    <input type="number" id="numero2">
+    
+    <button onclick="somma()">+</button>
+    <button onclick="sottrai()">-</button>
+    <button onclick="moltiplica()">*</button>
+    <button onclick="dividi()">/</button>
+
+    
+    <h3 id="risultato">Risultato: </h3>
+
+    <script>
+    function somma() {
+      let n1 = parseFloat(document.getElementById("numero1").value);
+      let n2 = parseFloat(document.getElementById("numero2").value);
+      let res = n1 + n2;
+      document.getElementById("risultato").textContent = "Risultato: " + res;
+    }
+    
+    function sottrazione() {
+      let n1 = parseFloat(document.getElementById("numero1").value);
+      let n2 = parseFloat(document.getElementById("numero2").value);
+      let res = n1 - n2;
+      document.getElementById("risultato").textContent = "Risultato: " + res;
+    }
+   function moltiplicazione() {
+      let n1 = parseFloat(document.getElementById("numero1").value);
+      let n2 = parseFloat(document.getElementById("numero2").value);
+      let res = n1 * n2;
+      document.getElementById("risultato").textContent = "Risultato: " + res;
+   }
+    function divisione() {
+      let n1 = parseFloat(document.getElementById("numero1").value);
+      let n2 = parseFloat(document.getElementById("numero2").value);
+      let res = n1 / n2;
+      document.getElementById("risultato").textContent = "Risultato: " + res;
+    }
+    </script>
+  </body>
+</html>
