@@ -1,5 +1,45 @@
 <!DOCTYPE HTML>
 <html>
-  <head>Cifrario di Cesare</head>
-  
+  <head>
+    <title>Cifrario di Cesare</title>
+  </head>
+  <body>
+    <h1>Cifrario di Cesare</h1>
+    <input type="text" id="testo1">
+    <input type="number" id="spostamento">
+    <button onclick="cripta()">Cripta</button>
+    <p id="risultato"></p>
+
+    <script>
+      function cripta() {
+        let t1 = document.getElementById("testo1").value.toUpperCase();
+        let n1 = parseInt(document.getElementById("spostamento").value);
+        let alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let testoCriptato = "";
+
+        for (let i = 0; i < t1.length; i++) {
+          let carattere = t1[i];
+          let posizione = -1;
+
+          for (let j = 0; j < alfabeto.length; j++) {
+            if (alfabeto[j] === carattere) {
+              posizione = j;
+            }
+          }
+
+          if (posizione !== -1) {
+            let nuovaPosizione = posizione + n1;
+            if (nuovaPosizione >= 26) {
+              nuovaPosizione = nuovaPosizione - 26;
+            }
+            testoCriptato = testoCriptato + alfabeto[nuovaPosizione];
+          } else {
+            testoCriptato = testoCriptato + carattere;
+          }
+        }
+
+        document.getElementById("risultato").textContent = "Risultato: " + testoCriptato;
+      }
+    </script>
+  </body>
 </html>
