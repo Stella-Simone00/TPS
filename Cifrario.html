@@ -12,7 +12,7 @@
 
     <script>
       function cripta() {
-        let t1 = document.getElementById("testo1").value;
+        let t1 = document.getElementById("testo1").value.toLowerCase();
         let n1 = parseInt(document.getElementById("spostamento").value);
         let alfabeto = "abcdefghijklmnopqrstuvwxyz";
         let testoCriptato = "";
@@ -22,7 +22,7 @@
           let posizione = -1;
 
           for (let j = 0; j < alfabeto.length; j++) {
-            if (alfabeto[j] == carattere) {
+            if (alfabeto[j] === carattere) {
               posizione = j;
             }
           }
