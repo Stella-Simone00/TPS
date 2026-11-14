@@ -1,14 +1,161 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="it">
   <head>
-    <title>Cifrario di Cesare</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrario di Cesare - TPS</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #111418;
+        color: #f3f4f6;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .card {
+        background-color: #161a1f;
+        border: 1px solid #262c34;
+        border-radius: 16px;
+        padding: 40px;
+        width: 100%;
+        max-width: 540px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        margin-bottom: 28px;
+        color: #ffffff;
+      }
+
+      .section-label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #8b949e;
+        margin-bottom: 10px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        background-color: #1c2128;
+        border: 1px solid #2d333b;
+        border-radius: 12px;
+        padding: 16px 18px;
+        font-size: 16px;
+        color: #ffffff;
+        outline: none;
+        transition: border-color 0.2s, background-color 0.2s;
+      }
+
+      input[type="text"]::placeholder,
+      input[type="number"]::placeholder {
+        color: #6e7681;
+      }
+
+      input[type="text"]:focus,
+      input[type="number"]:focus {
+        border-color: #48525e;
+        background-color: #212730;
+      }
+
+      button {
+        width: 100%;
+        background-color: #1c2128;
+        border: 1px solid #2d333b;
+        border-radius: 12px;
+        padding: 16px 20px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #ffffff;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px;
+        transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+      }
+
+      button:hover {
+        background-color: #242a33;
+        border-color: #444c56;
+      }
+
+      button:active {
+        transform: scale(0.99);
+      }
+
+      .arrow {
+        color: #8b949e;
+        font-size: 18px;
+        font-weight: 400;
+      }
+
+      .result-box {
+        margin-top: 24px;
+        background-color: #1c2128;
+        border: 1px solid #2d333b;
+        border-radius: 12px;
+        padding: 16px 18px;
+        min-height: 54px;
+        display: flex;
+        align-items: center;
+        word-break: break-all;
+      }
+
+      #risultato {
+        font-size: 16px;
+        color: #e6edf3;
+        font-weight: 500;
+      }
+    </style>
   </head>
   <body>
-    <h1>Cifrario di Cesare</h1>
-    <input type="text" id="testo1">
-    <input type="number" id="spostamento">
-    <button onclick="cripta()">Cripta</button>
-    <p id="risultato"></p>
+    <div class="card">
+      <h1>Cifrario di Cesare</h1>
+
+      <div class="form-group">
+        <label class="section-label" for="testo1">Frase da criptare</label>
+        <input type="text" id="testo1" placeholder="Inserisci il testo...">
+      </div>
+
+      <div class="form-group">
+        <label class="section-label" for="spostamento">Scostamento numerico</label>
+        <input type="number" id="spostamento" placeholder="Es. 3">
+      </div>
+
+      <button onclick="cripta()">
+        <span>Cripta frase</span>
+        <span class="arrow">&rarr;</span>
+      </button>
+
+      <div class="form-group" style="margin-top: 24px; margin-bottom: 0;">
+        <span class="section-label">Risultato in minuscolo</span>
+        <div class="result-box">
+          <p id="risultato">—</p>
+        </div>
+      </div>
+    </div>
 
     <script>
       function cripta() {
@@ -16,6 +163,10 @@
         let n1 = parseInt(document.getElementById("spostamento").value);
         let alfabeto = "abcdefghijklmnopqrstuvwxyz";
         let testoCriptato = "";
+
+        if (isNaN(n1)) {
+          n1 = 0;
+        }
 
         for (let i = 0; i < t1.length; i++) {
           let carattere = t1[i];
@@ -29,8 +180,11 @@
 
           if (posizione !== -1) {
             let nuovaPosizione = posizione + n1;
-            if (nuovaPosizione >= 26) {
+            while (nuovaPosizione >= 26) {
               nuovaPosizione = nuovaPosizione - 26;
+            }
+            while (nuovaPosizione < 0) {
+              nuovaPosizione = nuovaPosizione + 26;
             }
             testoCriptato = testoCriptato + alfabeto[nuovaPosizione];
           } else {
@@ -38,7 +192,7 @@
           }
         }
 
-        document.getElementById("risultato").textContent = "Risultato: " + testoCriptato;
+        document.getElementById("risultato").textContent = testoCriptato || "—";
       }
     </script>
   </body>
